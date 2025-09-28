@@ -79,7 +79,7 @@
 
   function spawnObstacle() {
     const img = document.createElement('img');
-    img.src = '../picture/pic1.png';
+    img.src = 'picture/pic1.png';
     img.alt = 'Obstacle';
     img.className = 'obstacle';
     // randomize size with a lower maximum scale
