@@ -83,7 +83,7 @@
 
   function spawnObstacle() {
     const img = document.createElement('img');
-    img.src = '../picture/pic1.png';
+    img.src = './picture/pic1.png';
     img.alt = 'Obstacle';
     img.className = 'obstacle';
     // randomize size with a lower maximum scale
@@ -184,25 +184,27 @@
   // Touch input
   gameEl.addEventListener('touchstart', (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (e.touches.length === 1) {
       touchStartY = e.touches[0].clientY;
       touchStartTime = Date.now();
     }
-  });
+  }, { passive: false });
 
   gameEl.addEventListener('touchend', (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (e.changedTouches.length === 1) {
       const touch = e.changedTouches[0];
       const touchDuration = Date.now() - touchStartTime;
       const touchDistance = Math.abs(touch.clientY - touchStartY);
       
       // Simple tap detection (short duration, small movement)
-      if (touchDuration < 200 && touchDistance < 10) {
+      if (touchDuration < 300 && touchDistance < 20) {
         jump();
       }
     }
-  });
+  }, { passive: false });
 
   // Mouse input (for desktop)
   gameEl.addEventListener('click', (e) => {

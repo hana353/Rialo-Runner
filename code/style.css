@@ -138,3 +138,23 @@ body {
 .game {
   touch-action: manipulation;
 }
+
+/* Additional mobile fixes */
+@media (hover: none) and (pointer: coarse) {
+  .game {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .game {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+  }
+}

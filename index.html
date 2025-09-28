@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Rialo Runner</title>
-  <link rel="preload" as="image" href="picture/pic1.png">
-  <link rel="preload" as="image" href="picture/pic2.png">
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="preload" as="image" href="./picture/pic1.png">
+  <link rel="preload" as="image" href="./picture/pic2.png">
+  <link rel="stylesheet" href="./code/style.css" />
 </head>
 <body>
   <div class="game-shell">
@@ -15,20 +15,19 @@
       <div class="score" id="score">00000</div>
     </header>
 
-    <main class="game">
+    <main class="game" id="gameArea">
       <div id="ground" class="ground"></div>
-      <img id="player" class="player" src="picture/pic2.png" alt="Player" draggable="false" />
+      <img id="player" class="player" src="./picture/pic2.png" alt="Player" draggable="false" />
       <div id="obstacles" class="obstacles"></div>
-      <div id="message" class="message hidden">Press Space or ↑ to start</div>
+      <div id="message" class="message hidden">Press Space, ↑ or tap to start</div>
     </main>
 
     <footer class="footer">
-      <span>Keys: Space or ↑ to jump • R to restart</span>
+      <span>Desktop: Space/↑ to jump • R to restart</span>
+      <span class="mobile-instructions">Mobile: Tap to jump • Tap to restart</span>
     </footer>
   </div>
 
-  <script src="./script.js"></script>
+  <script src="./code/script.js"></script>
 </body>
 </html>
-
-
