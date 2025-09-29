@@ -84,7 +84,9 @@
 
   function spawnObstacle() {
     const img = document.createElement('img');
-    img.src = 'picture/pic1.png';
+    const playerImgPath = playerEl.getAttribute('src') || '';
+    const obstacleImgPath = playerImgPath.replace(/pic2(\.[a-z0-9]+)?$/i, 'pic1.png');
+    img.src = obstacleImgPath;
     img.alt = 'Obstacle';
     img.className = 'obstacle';
     // randomize size with a lower maximum scale
