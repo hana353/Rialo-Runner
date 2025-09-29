@@ -7,6 +7,8 @@
   const obstaclesEl = document.getElementById('obstacles');
   const scoreEl = document.getElementById('score');
   const messageEl = document.getElementById('message');
+  const startBtn = document.getElementById('startBtn');
+  const restartBtn = document.getElementById('restartBtn');
 
   // Game state
   let isRunning = false;
@@ -53,6 +55,8 @@
     setPlayerBottom(playerY);
     scoreEl.textContent = '00000';
     messageEl.classList.add('hidden');
+    if (startBtn) startBtn.classList.add('hidden');
+    if (restartBtn) restartBtn.classList.add('hidden');
     obstaclesEl.innerHTML = '';
     requestAnimationFrame(loop);
   }
@@ -61,8 +65,9 @@
     isRunning = false;
     isGameOver = true;
     const finalScore = formatScore(score);
-    messageEl.innerHTML = `<div style="font-weight:700;margin-bottom:6px;">Game Over</div><div style="margin-bottom:6px;">Score: ${finalScore}</div><div>Press R or tap to restart</div>`;
-    messageEl.classList.remove('hidden');
+    messageEl.innerHTML = `<div style="font-weight:700;margin-bottom:6px;">Game Over</div><div style="margin-bottom:6px;">Score: ${finalScore}</div>`;
+    messageEl.classList.add('hidden');
+    if (restartBtn) restartBtn.classList.remove('hidden');
   }
 
   function formatScore(n) {
@@ -83,7 +88,7 @@
 
   function spawnObstacle() {
     const img = document.createElement('img');
-    img.src = './picture/pic1.png';
+    img.src = '../picture/pic1.png';
     img.alt = 'Obstacle';
     img.className = 'obstacle';
     // randomize size with a lower maximum scale
@@ -180,6 +185,31 @@
       if (isGameOver || !isRunning) startGame();
     }
   });
+
+  // Button controls
+  if (startBtn) {
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!isRunning || isGameOver) {
+        startGame();
+      } else {
+        // If running, a Start click just triggers a jump
+        jump();
+      }
+    });
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      startGame();
+    });
+  }
+
+  // Initial UI state
+  if (startBtn) startBtn.classList.remove('hidden');
+  if (restartBtn) restartBtn.classList.add('hidden');
+  if (messageEl) messageEl.classList.add('hidden');
 
   // Touch input
   gameEl.addEventListener('touchstart', (e) => {
