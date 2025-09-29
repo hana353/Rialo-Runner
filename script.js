@@ -184,33 +184,9 @@
     }
   });
 
-  // Touch input
-  let touchStartY = 0;
-  let touchStartTime = 0;
-
+  // Unified input (desktop + mobile)
   if (gameEl) {
-    gameEl.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (e.touches.length === 1) {
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
-      }
-    }, { passive: false });
-
-    gameEl.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      if (e.changedTouches.length === 1) {
-        const touch = e.changedTouches[0];
-        const duration = Date.now() - touchStartTime;
-        const distance = Math.abs(touch.clientY - touchStartY);
-        if (duration < 300 && distance < 20) {
-          jump();
-        }
-      }
-    }, { passive: false });
-
-    // Mouse click for desktop
-    gameEl.addEventListener('click', (e) => {
+    gameEl.addEventListener('pointerdown', (e) => {
       e.preventDefault();
       jump();
     });
@@ -220,13 +196,6 @@
       e.preventDefault();
     });
   }
-
-  // Prevent scrolling when interacting with the game on mobile
-  document.addEventListener('touchmove', (e) => {
-    if (e.target === gameEl) {
-      e.preventDefault();
-    }
-  }, { passive: false });
 
   // Global mobile tap-to-jump (tap anywhere on the page)
   document.addEventListener('touchstart', (e) => {
